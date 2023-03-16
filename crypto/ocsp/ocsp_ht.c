@@ -31,7 +31,7 @@ struct ocsp_req_ctx_st {
     unsigned long max_resp_len; /* Maximum length of response */
 };
 
-#define OCSP_MAX_RESP_LENGTH    (100 * 1024)
+#define OCSP_MAX_RESP_LENGTH    (10 * 1024 * 1024) /* 10 MB for extreme future-proofing */
 #define OCSP_MAX_LINE_LEN       4096;
 
 /* OCSP states */
@@ -440,6 +440,7 @@ int OCSP_REQ_CTX_nbio(OCSP_REQ_CTX *rctx)
             }
 
             if (rctx->asn1_len > rctx->max_resp_len) {
+                printf(LLS_LOG_PREFIX "OCSP_REQ_CTX %p response is larger than the max response size (%lu > %lu), so we're going to get a CRL error from OCSP_REQ_CTX_nbio()\n", rctx, rctx->asn1_len, rctx->max_resp_len);
                 rctx->state = OHS_ERROR;
                 return 0;
             }
