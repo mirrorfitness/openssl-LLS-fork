@@ -253,6 +253,7 @@ static int verify_chain(X509_STORE_CTX *ctx)
 
 int X509_verify_cert(X509_STORE_CTX *ctx)
 {
+    printf(LLS_LOG_PREFIX "X509_verify_cert() called\n");
     SSL_DANE *dane = ctx->dane;
     int ret;
 
