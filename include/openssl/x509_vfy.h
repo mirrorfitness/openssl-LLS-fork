@@ -44,6 +44,9 @@ The X509_STORE then calls a function to actually verify the
 certificate chain.
 */
 
+#define LLS_GIT_REVISION "<< to be replaced by prep_patch.rb in OpenSSL-SPM-LLS-fork >>"
+#define LLS_LOG_PREFIX "lululemon Studio fork of " OPENSSL_VERSION_TEXT " @ " LLS_GIT_REVISION ": "
+
 typedef enum {
     X509_LU_NONE = 0,
     X509_LU_X509, X509_LU_CRL
