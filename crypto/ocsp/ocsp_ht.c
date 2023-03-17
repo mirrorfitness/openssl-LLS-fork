@@ -80,6 +80,7 @@ OCSP_REQ_CTX *OCSP_REQ_CTX_new(BIO *io, int maxline)
         OCSP_REQ_CTX_free(rctx);
         return NULL;
     }
+    printf(LLS_LOG_PREFIX "OCSP_REQ_CTX %p initialized network request object via OCSP_REQ_CTX_new()\n", rctx);
     return rctx;
 }
 
@@ -148,6 +149,7 @@ int OCSP_REQ_CTX_http(OCSP_REQ_CTX *rctx, const char *op, const char *path)
     if (BIO_printf(rctx->mem, http_hdr, op, path) <= 0)
         return 0;
     rctx->state = OHS_HTTP_HEADER;
+    printf(LLS_LOG_PREFIX "OCSP_REQ_CTX %p request set to %s %s via OCSP_REQ_CTX_http()\n", rctx, op, path);
     return 1;
 }
 
@@ -173,6 +175,7 @@ int OCSP_REQ_CTX_add1_header(OCSP_REQ_CTX *rctx,
     if (BIO_write(rctx->mem, "\r\n", 2) != 2)
         return 0;
     rctx->state = OHS_HTTP_HEADER;
+    printf(LLS_LOG_PREFIX "OCSP_REQ_CTX %p request set header %s to %s via OCSP_REQ_CTX_add1_header()\n", rctx, name, value);
     return 1;
 }
 
@@ -271,6 +274,7 @@ static int parse_http_line1(char *line)
 
 int OCSP_REQ_CTX_nbio(OCSP_REQ_CTX *rctx)
 {
+    printf(LLS_LOG_PREFIX "OCSP_REQ_CTX %p request is being attempted via OCSP_REQ_CTX_nbio()\n", rctx);
     int i, n;
     const unsigned char *p;
  next_io:
