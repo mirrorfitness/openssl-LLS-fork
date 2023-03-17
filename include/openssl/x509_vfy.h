@@ -326,6 +326,8 @@ void X509_STORE_set_lookup_crls(X509_STORE *ctx,
 #define X509_STORE_set_lookup_crls_cb(ctx, func) \
     X509_STORE_set_lookup_crls((ctx), (func))
 X509_STORE_CTX_lookup_crls_fn X509_STORE_get_lookup_crls(X509_STORE *ctx);
+/* This uses code borrowed from the CLI tools to automatically download CRLs. */
+void lulu_studio__X509_STORE_enable_fetching_crls(X509_STORE *st);
 void X509_STORE_set_cleanup(X509_STORE *ctx,
                             X509_STORE_CTX_cleanup_fn cleanup);
 X509_STORE_CTX_cleanup_fn X509_STORE_get_cleanup(X509_STORE *ctx);
